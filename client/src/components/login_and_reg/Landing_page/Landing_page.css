@@ -1,0 +1,399 @@
+body{
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    margin: 0px;
+}
+
+/* <Button onClick={() => setshowalert({...showalert,removealert:'true'})} >close me</Button> */
+.main{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: hidden;
+    background-color: #f9f9f9;
+
+
+}
+
+
+.lowerside{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25%;
+}
+
+
+
+#alert_id{
+    display: flex;
+    align-items: center;
+    gap: 78%;
+}
+
+.left_side{
+    color: #1877f2;
+    font-weight: 900;
+    font-size: 7rem;
+    height: 100vh;
+    align-items: center;
+    margin-left: 25%;
+}
+
+.left_side_parts{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    
+}
+
+#left-1{
+    margin-top: 40%;
+}
+
+#left-1 img{
+    width: 50%;
+    height: 50%;
+}
+
+#left-2{
+    display: flex;
+    align-items: center;
+}
+
+.right_side{
+    display: grid;
+    grid-template-rows: 5fr 1fr;
+    height: 50vh;
+    width: 55vh;
+    align-self: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    background: white;
+}
+
+
+.right_side_upper{
+    display: grid;
+    /* grid-template-rows: repeat(auto); */
+}
+
+.right_side_items{
+    border-radius: 5px;
+}
+
+#item_1{
+    margin: auto;
+    height: 50%;
+    background-color: #f1f3f4;
+    display: flex;
+    margin-top: 7%;
+    width: 85%;
+    
+}
+
+
+
+#item_2{
+    width:86%;
+    margin: auto;
+    height: 70%;
+    border: 2px solid #d9d9d9;
+    display: grid;
+    grid-template-columns: 90% 10%;
+    background-color: #f1f3f4;
+
+}
+
+#item_2_1{
+    background-color: #f1f3f4;
+    border:none;
+    color: black;
+}
+
+#item_2_1 input[type='text']{
+    color: black;
+    background-color: #f1f3f4;
+}
+
+
+#item_2_2 {
+    background-color: #f1f3f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#item_3{
+    width: 86%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 75%;
+    background-color: #1877f2;
+    color: white;
+    font-weight: 900;
+    font-size: 1rem;
+    border: 0px;
+    margin-top: ;
+}
+
+#item_3:hover{
+    background-color: #086bee;
+}
+
+#item_4{
+    width: fit-content;
+    display: flex;
+    align-self: center;
+    margin: auto;
+    color: #1877f2;
+    text-decoration: none;
+}
+
+.form-check{
+    display: flex;
+    align-items: center;
+    margin-left:8%;
+}
+
+#exampleCheck1{
+    display: flex;
+    align-items: center;
+    margin-right: 2%;
+}
+
+#item_5{
+    border-bottom: 1px solid #d9d9d9;
+    height: fit-content;
+    width: 90%;
+    margin-left: 5%;
+}
+#item_6{
+    background-color: #42b72a;
+    color: white;
+    font-weight: 900;
+    width: 50%;
+    height: 75%;
+    margin-left: 30%;
+    border-radius: 7px;
+    border: 0px;
+}
+
+#item_6:hover{
+    background-color: #30ce11;
+}
+
+input{
+    padding-left: 5%;
+    border: 2px solid #d9d9d9;
+}
+input[type=text]:focus {
+    outline: none; 
+    border: 2px solid #1877f2;
+  }
+input[type=password]:focus {
+    outline: none; 
+    border: 2px solid #1877f2;
+  }
+
+  input[type=password] {
+    border: 2px solid #d9d9d9;
+  }
+  
+  
+.new_account_box{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    
+}
+
+.dialog_box{
+width: 27%;
+height: 65%;
+box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+margin: auto;
+display: grid;
+grid-template-rows: repeat(7,1fr);
+background-color: white;
+
+}
+
+#new_item_1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+    height: fit-content;
+}
+
+#item_1_1{
+    color: black;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+#item_1_1::after{
+    content: "It's quick and easy";
+    display: block;
+    margin-top: 2%;
+    font-size: .8rem;
+    color: #606770;
+}
+
+#item_1_2{
+    display: flex;
+    justify-content: flex-end;
+}
+#item_1_2 img{
+    cursor: pointer;
+}
+
+#item_1_2 img{
+    height: 30%;
+}
+
+#new_item_2{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+}
+
+.names{
+    border: 2px solid #d9d9d9;
+    width: 80%;
+    height: 50%;
+    display: flex;
+    justify-self: center;
+    border-radius: 5px;
+    margin: auto;
+    background-color: #f1f3f4;
+    
+}
+
+.input_fields{
+    border: 2px solid #d9d9d9;
+    width: 85%;
+    height: 55%;
+    display: flex;
+    justify-self: center;
+    border-radius: 5px;
+    margin: auto;
+    background-color: #f1f3f4;
+}
+
+#item_4_2{
+    display: none;
+    margin-bottom: 1%;
+    margin-left: 4%;
+    font-size: .8rem;
+    font-weight: 700;
+    color: red;
+}
+
+#item_5_1{
+    margin-bottom: 1%;
+    margin-left: 5%;
+    font-size: .8rem;
+    color: #606770;
+}
+
+
+#new_item_6{
+    display: grid;
+    grid-template-rows: 1fr 1.5fr
+}
+
+#item_6_1{
+    margin-left: 5%;
+    color: #606770;
+    font-size: .9rem;
+}
+
+#item_6_2{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    width: 95%;
+    justify-self: center;
+    gap: 2%;
+}
+
+.item_6_2_content{
+    border: 2px solid #d9d9d9;
+    border-radius: 3px;
+    margin-left: 15%;
+    display: grid;
+    grid-template-columns: 2fr 1fr
+}
+.checkmark{
+    width: 70%;
+    height: 70%;
+    background-color: #1877f2;
+    display: none;
+    border-radius: 50%;
+    
+}
+
+.gender{
+    
+    width: 20%;
+    height: 30%;
+    border: 2px solid black;
+    margin-left: 5%;
+    margin-top: 8%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    
+}
+
+.gender input:checked + .checkmark{
+    display: inline-block;
+}
+
+.gender input{
+    display: none;
+}
+
+.gender_text{
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    
+}
+
+#new_item_7{
+    background-color: #42b72a;
+    width: 40%;
+    display: flex;
+    margin: auto;
+    height: 50%;
+    border-radius: 5px;
+    border: none;
+}
+
+
+#button_text{
+    color: white;
+    font-weight: 900;
+    font-size: 1rem;
+    margin: auto;
+    border: 0px;
+}
+
+input:focus{
+    outline: none;
+}
+#new_item_7{
+    cursor: pointer;
+}
+
+/* hover works if i use this */
+#new_item_7.hover:hover{
+    background-color: #30ce11;
+}
+

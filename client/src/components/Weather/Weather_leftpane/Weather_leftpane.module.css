@@ -1,0 +1,32 @@
+.main{
+    background-color: #1c1e21;
+    color: white;
+    width: 50vh;
+    height: 95vh;
+}
+
+#item_1{
+    font-size: 2rem;
+    height: 8%;
+    display: flex;
+    align-items: center;   
+    margin-left: 4%; 
+}
+
+#item_2 input[type='text']{
+    width: 95%;
+    margin: auto;
+    background-color: transparent;
+    border: 1px solid #3A3B3C;
+    border-radius: 3px;
+    height: 6vh;
+}
+
+.item3and4{
+    margin-top: 2%;
+    margin-left: 4%;
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    font-size: 1.1rem;
+}
+

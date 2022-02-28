@@ -1,0 +1,56 @@
+.main{
+    width: 100%;    
+    margin: 3%;
+    overflow-y: scroll;
+}
+
+.upperpart{
+    width: 100%;
+    display: flex;
+    gap: 70%;
+    color: white;
+}
+
+#item_1{
+    font-size: 1.5rem;
+}
+
+#item_2{
+    font-size: 1.3rem;
+    color: blue;
+}
+
+.lowerpart{
+    height: 100vh;
+}
+
+.requests{
+    display: flex;
+}
+
+.card{
+    border-radius: 8px;
+}
+
+#confirm{
+    width: 100%;
+    margin-bottom: 4%;
+}
+
+#confirm:focus{
+    box-shadow: none;
+}
+
+#delete{
+    width: 100%;
+    background:#4b4c4d;
+    border:none
+}
+
+#delete:focus{
+    box-shadow: none;
+}
+
+#delete:hover{
+    background-color: #6e6f70;
+}

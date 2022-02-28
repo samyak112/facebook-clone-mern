@@ -1,0 +1,55 @@
+.main{
+    width: 50vh;
+    height: 100vh;
+    background-color: #1c1e21;
+}
+
+.upper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    color: white;
+    height: 8%;
+    /* border: 2px solid white; */
+    width: 93%;
+    padding: 3%;
+    font-size: 1.5rem;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#upperright{
+    display: flex;
+    justify-content: flex-end;
+    width: fit-content;
+    padding: 2%;
+    margin-left: 90%;
+    background-color: #3a3b3c;
+}
+
+
+.items{
+    display: flex;
+    color: white;
+    align-items: center;
+    height: 8vh;
+    gap: 3%;
+    padding: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 10px;
+}
+
+.items:hover{
+    background-color: #3a3b3c;
+    
+}
+
+.circle{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 1.5%;
+    background-color: #3a3b3c;
+
+}
