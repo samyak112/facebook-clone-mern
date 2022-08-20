@@ -139,33 +139,28 @@ useEffect(()=>{
                 </div>
               </div>
               <div id={Public_profilecss.upperpart_lower_1_3}>
-                <div>
+                <div className={Public_profilecss.button_wrap}>
                     {
                       profile_info.status == 'Sent' 
-                      ? <Button variant="secondary" className={Public_profilecss.button} id={Public_profilecss.button_1} size="lg">
+                      ? <Button variant="secondary" className={Public_profilecss.button} size="lg">
                           <img src={friend} alt='friend' /> {profile_info.status}
                         </Button>   
                       :profile_info.status == 'Add Friend' 
-                          ?<Button variant="secondary" className={Public_profilecss.button} id={Public_profilecss.button_1} onClick={sendFriendRequest}>
+                          ?<Button variant="secondary" className={Public_profilecss.button}  onClick={sendFriendRequest}>
                             <PersonAddIcon/> {profile_info.status}
                           </Button>
-                        :profile_info.status == 'Confirm Req' 
-                        ?<Button variant="secondary" className={Public_profilecss.button} id={Public_profilecss.button_1} onClick={acceptReq}>
+                        :profile_info.status == 'Confirm' 
+                        ?<Button variant="secondary" className={Public_profilecss.button} onClick={acceptReq}>
                             <PersonAddIcon/> {profile_info.status}
                           </Button>
                         :
-                          <Button variant="secondary" className={Public_profilecss.button} id={Public_profilecss.button_1} >
+                          <Button variant="secondary" className={Public_profilecss.button}  >
                               <PersonAddIcon/> {profile_info.status}
                             </Button>
-                          
-                      
                     }
-                      
-                    
                 </div>
-                  
                   <Button variant="primary" className={Public_profilecss.button} id={Public_profilecss.button_2} size="lg">
-                  <ChatBubbleIcon fontSize='small'/> Message
+                    <ChatBubbleIcon fontSize='small'/> Message
                   </Button>
               </div>
             </div>

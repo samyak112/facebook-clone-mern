@@ -23,6 +23,10 @@
     margin-top: 2%;
 }
 
+.userinfo_content{
+    text-decoration: none;
+}
+
 #profile_pic{
     border-radius: 50%;
     width: 70%;
@@ -43,6 +47,11 @@
 
 #name{
     color: white;
+}
+
+#name:hover{
+    border-bottom: 1px solid white;
+    width: fit-content;
 }
 
 #postTime{
@@ -77,6 +86,13 @@
 
 #likescount{
     margin-left: 4%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#like_image{
+    max-width: 10%;
 }
 
 #commentAndSharecount{
@@ -90,15 +106,19 @@
     margin-bottom: 2%;
     display: grid;
     grid-template-columns: repeat(3,1fr);
+    border-top: 1px solid #4d4e50 ;
 }
 
 .post_buttons{
+    margin-top: .5rem;
+    height: 100%;
+    padding: .5rem;
     display: flex;
     justify-content: center;
     color: white;
-    margin: 2%;
     border-radius: 8px;
     cursor: pointer;
+    gap: .5rem;
 }
 
 .post_buttons:hover{

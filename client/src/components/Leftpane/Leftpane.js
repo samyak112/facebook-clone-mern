@@ -24,7 +24,7 @@ export default function Leftpane() {
     return (
             <div className={Leftpanecss.main}>
                 <Link to={`/profile/${user_data.id}`} className={Leftpanecss.items} id={Leftpanecss.item_1} >
-                    <div className={Leftpanecss.leftside}>
+                    <div id={Leftpanecss.profile_image} className={Leftpanecss.leftside}>
                         <img src={user_data.profile_image} alt="" />
                     </div>
                     <div className={Leftpanecss.rightside} id='item_left'>{user_data.first_name} {user_data.second_name}</div>

@@ -1,0 +1,99 @@
+Landing page :- agar ek baar registration form ka use karke registration kar lia to doosri baar registration karne par nahi hota for atleast 1 minute uske baad kaam karta h meaning assume tum abhi abhi ek registration karke aye ho aur main page par redirect kar dia ab agar firse registration karne ki koshish karoge to page reload ho jayegga aur sara data url m dikhega but agar 1 minute baad try karoge to mast chlega.
+Reusable code :- abhi tak mujhe navbar saare components m manually daalna pad raha h use theek karna h
+loggin in - when i enter correct password and try to login the problem is i have to reload to go to the next page , but it doesnot do it on itself
+profile_pic :- profile pic update karne ke baad vo immediately update photo show nahi karta page reload karna padta h
+saving code here for later use if needed from original profile.js
+<div className={Profilecss.upperpart}>
+        <div className={Profilecss.upperpart_content} id={Profilecss.upperpart_upper}>
+          <div className={Profilecss.upperpart_content} id={Profilecss.upperpart_upper_box}>
+          
+          </div>
+        </div>
+        <div className={Profilecss.upperpart_content} id={Profilecss.upperpart_lower}>
+          <div className={Profilecss.upperpart_lower_content} id={Profilecss.upperpart_lower_1}>
+            <div id={Profilecss.upperpart_lower_1_box}>
+              <div id={Profilecss.upperpart_lower_1_1}>
+                <div id={Profilecss.circle}></div>
+              </div>
+              <div id={Profilecss.upperpart_lower_1_2}>
+                <div id={Profilecss.upperpart_lower_1_2_1}>
+                  <h2>{profile_info.first_name}    {profile_info.second_name}</h2>
+                </div>
+              </div>
+              <div id={Profilecss.upperpart_lower_1_3}>
+                  <Button variant="secondary" className={Profilecss.button} id={Profilecss.button_1} size="lg">
+                  <img src={friend} alt='friend' /> Add Friend
+                  </Button>
+                  <Button variant="primary" className={Profilecss.button} id={Profilecss.button_2} size="lg">
+                  <ChatBubbleIcon fontSize='small'/> Message
+                  </Button>
+              </div>
+            </div>
+            
+          </div>
+          <div className={Profilecss.upperpart_lower_content} id={Profilecss.upperpart_lower_2}>
+            <div  id={Profilecss.upperpart_lower_2_box}>
+              <div  id={Profilecss.upperpart_lower_2_box_leftside}>
+                <Button  className={Profilecss.upperpart_lower_2_box_leftside_items} id={Profilecss.Posts}>Posts</Button>
+                <Button className={Profilecss.upperpart_lower_2_box_leftside_items} id={Profilecss.About}>About</Button>
+                <Button className={Profilecss.upperpart_lower_2_box_leftside_items} id={Profilecss.Friends}>Friends</Button>
+                <Button className={Profilecss.upperpart_lower_2_box_leftside_items} id={Profilecss.Photos}>Photos</Button>
+                <Button className={Profilecss.upperpart_lower_2_box_leftside_items} id={Profilecss.Videos}>Videos</Button>
+                <Button className={Profilecss.upperpart_lower_2_box_leftside_items} id={Profilecss.Check_ins}>Check-in</Button>
+                <Button className={Profilecss.upperpart_lower_2_box_leftside_items} id={Profilecss.More}>More</Button>
+              </div>
+              <div  id={Profilecss.upperpart_lower_2_box_rightside}>
+                <Button  id={Profilecss.three_dots} size="sm">
+                    <MoreHorizIcon fontSize='small'/>
+                  </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={Profilecss.lowerpart}>
+        <div id={Profilecss.lowerpart_box}>
+          <div className={Profilecss.lowerpart_content} id={Profilecss.lowerpart_left}>
+            <div className={Profilecss.lowerpart_left_content} id={Profilecss.lowerpart_left_intro}>
+              {/* intro will be here */}
+            </div>
+            <div className={Profilecss.lowerpart_left_content} id={Profilecss.lowerpart_left_photos}>
+              <div className={Profilecss.infobox} id={Profilecss.photos_upperpart}>
+                <div id={Profilecss.photos_1}>
+                  Photos
+                </div>
+                <div className={Profilecss.seemore} id={Profilecss.photos_2}>
+                  See more
+                </div>
+              </div>
+              <div className={Profilecss.infobox_lowerpart} id={Profilecss.photos_lowerpart}>
+                <div id={Profilecss.photo}>
+                  {/* photos of user will be here */}
+                </div>
+              </div>
+            </div>
+            <div className={Profilecss.lowerpart_left_content} id={Profilecss.lowerpart_left_friends}>
+            <div className={Profilecss.infobox} id={Profilecss.friends_upperpart}>
+                <div id={Profilecss.friends_1}>
+                  Friends
+                </div>
+                <div className={Profilecss.seemore} id={Profilecss.friends_2}>
+                  See more
+                </div>
+              </div>
+              <div className={Profilecss.infobox_lowerpart} id={Profilecss.friends_lowerpart}>
+                <div className={Profilecss.friends}>
+                  <div id={Profilecss.friend_photo}>s</div>
+                  <div id={Profilecss.friend_name}>d</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={Profilecss.lowerpart_content} id={Profilecss.lowerpart_right}>
+            <New_post/>
+          </div>
+        </div>
+      </div>
+
+
+    

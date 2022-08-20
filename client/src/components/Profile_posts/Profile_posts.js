@@ -30,7 +30,7 @@ export default function Profile_posts() {
     useEffect(()=>{
         getallposts()
     },[])
-    console.log(myposts)
+    console.log(myposts,'these are the postss')
     return (
         <>  
         {   myposts[0]=='No Posts Yet' || myposts.length==0 || myposts[0].time==''?

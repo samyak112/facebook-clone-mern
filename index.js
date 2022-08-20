@@ -52,7 +52,8 @@ var user_details = new mongoose.Schema({
   posting:[{
     post_data : String,
     image:String,
-    time:String
+    time:String,
+    likes:[]
   }],
   outgoing_reqs : [{
     status:String,
@@ -66,7 +67,8 @@ var user_details = new mongoose.Schema({
   }],
   friends:[{
     id:String
-  }]
+  }],
+  liked_posts:[]
   
 },{ typeKey: '$type' })
 
@@ -151,6 +153,7 @@ app.post('/getdata' , authToken,(req,res) =>{
 })
 // post request for signing up
 app.post('/register', function (req, res) {
+  console.log('inside register')
 // these are the values of sign up form
     first_name = req.body.first_name,
     second_name = req.body.second_name,
@@ -158,8 +161,14 @@ app.post('/register', function (req, res) {
     current_password = req.body.current_password,
     date = req.body.date,
     gender = req.body.gender,
-    authorized = false,
-    profile_image = process.env.default_profile_pic
+    authorized = false
+    console.log(gender)
+    if(gender == 'Male'){
+      profile_image = process.env.default_profile_pic_male
+    }
+    else{
+      profile_image = process.env.default_profile_pic_female
+    }
     // otp is in const because otherwise it makes a new string every time we use this variable
     const otp = makeid(6)
 // here we saved those values in the new user to be saved in database 
@@ -198,7 +207,7 @@ app.post('/register', function (req, res) {
  //updated account creds without changing otp because otp is not expired yet and someone tried to fill the form again with same email address
         if(((Date.now())-current_time_stamp ) < 120000){
           // updated values of form beacuse we refilled the forms
-          first_name = req.body.name
+          first_name = req.body.first_name
           second_name = req.body.second_name,
           email = req.body.email,
           password = req.body.password,
@@ -208,21 +217,21 @@ app.post('/register', function (req, res) {
           user.updateOne({ email: email }, changing_account_creds, function (err, result) {
             if (err) throw err;
             else {
-              console.log('goinf to verification')
+              console.log('going to verification')
             }
             var otp = data[0].verification[0].code
             mail_value = data[0].email
-            name_value = req.body.name
+            name_value = first_name
             send_mail(otp,mail_value,name_value)
             res.status(201).json({message:'going to verificatiom' , status:201})
           });
         }
 
-//updated account creds with changing otp because otp is not expired yet and someone tried to fill the form again with same email address
+//updated account creds with changing otp because otp is expired and someone tried to fill the form again with same email address
         else{
           // updated values of form beacuse we refilled the form
           const new_otp = makeid(6)
-          var name_value = req.body.name
+          var name_value = req.body.first_name
           second_name = req.body.second_name,
           email = req.body.email,
           current_password = req.body.current_password,
@@ -254,7 +263,7 @@ app.post('/sign', function (req, res) {
     else {
       if (req.body.current_password == data[0].current_password) {
           if (data[0].authorized == true) {
-            const token = jwt.sign({id:data[0].id , first_name:data[0].first_name, second_name:data[0].second_name},process.env.ACCESS_TOKEN)
+            const token = jwt.sign({id:data[0].id , first_name:data[0].first_name, second_name:data[0].second_name , profile_image:data[0].profile_image},process.env.ACCESS_TOKEN)
             res.status(201).json({message:'you are verified',status:201 , token:token});
             console.log('you are verified')
           }
@@ -319,8 +328,6 @@ app.post('/verify/:first_name/:email', function (req, res) {
 // post request for forgot password
 app.post('/forgot_password',function(req,res){
   email = req.body.email
-  current_password = req.body.current_password
-  new_password = req.body.new_password
   user.find({email:email},function(err,data){
     if(data.length == 0){
       res.status(404).json({message:'no user found' , status:404})
@@ -358,7 +365,7 @@ app.post('/post',(req,res)=>{
   var new_val = { $push: {posting: [{
     post_data: post_data,
     image: image_url,
-    time:Date.now()
+    time:`${(new Date().getFullYear())}-0${new Date().getMonth()}-0${new Date().getDate()}`
   }]} };
   user.updateOne({ _id: verified.id }, new_val, function (err, result_2) {
     if (err) console.log(err);
@@ -378,10 +385,10 @@ app.post('/searchResults',authToken_2,(req,res)=>{
           }
           else{
             for(let i = 0 ; i<=(result.length-1);i++){
-              response_array.push({first_name:result[i].first_name,second_name:result[i].second_name,id:result[i].id})
+              response_array.push({first_name:result[i].first_name,second_name:result[i].second_name,id:result[i].id,profile_image:result[i].profile_image})
             }
             res.send({response_array:response_array})
-            console.log(response_array)
+            // console.log(response_array)
           }
       }
   })
@@ -425,7 +432,7 @@ app.post('/profile/:id',authToken_2,(req,res)=>{
           }
         }
         if(outgoing_req == 1){
-          res.send({first_name:data[0].first_name,second_name:data[0].second_name,status:'Confirm Req',profile_image:data[0].profile_image,cover_image:data[0].cover_photo})
+          res.send({first_name:data[0].first_name,second_name:data[0].second_name,status:'Confirm',profile_image:data[0].profile_image,cover_image:data[0].cover_photo})
           console.log('confirm req')
         }
         else{
@@ -507,12 +514,12 @@ app.post('/addFriend/:id',authToken_2,(req,res)=>{
     status: 'pending',
     to: receivers_id
   }]} };
-  console.log(sender_id.first_name)
+  console.log(sender_id.profile_image,'ye ri image')
   var incoming =  { $push: {incoming_reqs: [{
     status: 'pending',
     from: sender_id.id,
     name : sender_id.first_name + ' ' +sender_id.second_name,
-    profile_pic : 'prof pic will be here'
+    profile_pic : sender_id.profile_image
   }]} };
   var already_sent = 0
   user.find({_id:sender_id.id},function(err3,data){
@@ -552,7 +559,7 @@ app.post('/show_requests',function(req,res){
       else{
         var all_requests = []
         for (let i = 0; i < data[0].incoming_reqs.length; i++) {
-              all_requests.push({name:data[0].incoming_reqs[i].name,id:data[0].incoming_reqs[i].from})
+              all_requests.push({name:data[0].incoming_reqs[i].name,id:data[0].incoming_reqs[i].from,profile_image:data[0].incoming_reqs[i].profile_pic})
         }
         console.log(all_requests)
         res.send(all_requests)
@@ -617,6 +624,7 @@ app.post('/friend_list/:id', function (req,res){
     else{
       for (let i = 0; i < data[0].friends.length; i++) {
         var data2 = await user.find({_id:data[0].friends[i].id})
+        console.log(data2[0])
         friends_list.push({first_name:data2[0].first_name , second_name:data2[0].second_name,id:data2[0]._id,image:data2[0].profile_image})
       }
       res.send(friends_list)
@@ -625,7 +633,6 @@ app.post('/friend_list/:id', function (req,res){
 })
 
 app.post('/allposts',function(req,res){
-
   const authHeader = req.headers['x-auth-token']
   const user_id = jwt.verify(authHeader, process.env.ACCESS_TOKEN);
   posts = []
@@ -634,20 +641,37 @@ app.post('/allposts',function(req,res){
     if(err)
     console.log(err)
     else{
-      for (let i = 0; i < data[0].friends.length; i++) {
-        var data_2 = await user.find({_id:data[0].friends[i].id})
-        array_length = data_2[0].posting.length-1
-        if(data_2[0].posting.length!=0){
-          posts.push({post_data:data_2[0].posting[array_length].post_data,
-            image:data_2[0].posting[array_length].image,
-            profile_image:data_2[0].profile_image,
-          time:data_2[0].posting[array_length].time,
-          _id:data_2[0].posting[array_length].time,
+      user_array_length_1 = data[0].posting.length  
+      user_array_length_2 = data[0].posting.length-1  
+      if(user_array_length_1!=0){
+        posts.push({post_data:data[0].posting[user_array_length_2].post_data,
+          image:data[0].posting[user_array_length_2].image,
+          post_id:data[0].posting[user_array_length_2].id,
+          profile_image:data[0].profile_image,
+          time:data[0].posting[user_array_length_2].time,
+          _id:data[0]._id,
           user_image:data[0].profile_image,
-        name:data_2[0].first_name+ ' ' + data_2[0].second_name})
+          likes:data[0].posting[user_array_length_2].likes,
+          name:data[0].first_name+ ' ' + data[0].second_name})
         }
-        else{
-          posts.push('No posts yet')
+      if(data[0].friends.length != 0){
+        for (let i = 0; i < data[0].friends.length; i++) {
+          var data_2 = await user.find({_id:data[0].friends[i].id})
+          array_length = data_2[0].posting.length  
+          
+          array_length_2 = array_length-1
+          if(array_length!=0){
+            posts.push({post_data:data_2[0].posting[array_length_2].post_data,
+                        post_id:data_2[0].posting[array_length_2]._id,
+                        image:data_2[0].posting[array_length_2].image,
+                        profile_image:data_2[0].profile_image,
+                        time:data_2[0].posting[array_length_2].time,
+                        likes:data_2[0].posting[array_length_2].likes,
+                        _id:data_2[0]._id,
+                        user_image:data[0].profile_image,
+                        name:data_2[0].first_name+ ' ' + data_2[0].second_name})
+          }
+           
         }
       }
         res.send(posts)
@@ -662,6 +686,7 @@ app.post('/user_posts/:id',function(req,res){
   user.find({_id:user_id},function(err,data){
     if(err) console.log(err)
     else{
+      console.log(data[0].posting.length)
       for (let i = 0; i < data[0].posting.length; i++) {
         if(data[0].posting.length!=0){
           array_length = data[0].posting.length
@@ -704,7 +729,68 @@ app.post('/photos/:id',function(req,res){
 
 })
 
+app.post('/add_like',function(req,res){
+  const authHeader = req.headers['x-auth-token']
+  const user_id = jwt.verify(authHeader, process.env.ACCESS_TOKEN);
+  const id = user_id.id
+  const post_id = req.body.post_id
 
+  var add_like = { $push: { 'posting.$.likes': id}}
+  var liked_posts = { $push: { liked_posts: post_id}}
+
+  // for the user account from which the post was disliked
+  var dislike_1 = { $pull: { liked_posts: post_id}}
+
+  // for the account which posted the pic
+  var dislike_2 = { $pull: { 'posting.$.likes': id}}
+
+
+  user.find({_id:id},function(err,data){
+    if(err) console.log(err)
+    else{
+      for (let i = 0; i <= data[0].liked_posts.length; i++) {
+        if(data[0].liked_posts[i]==post_id){
+          // console.log('inside dislike')
+          user.updateOne({_id : id }, dislike_1, function (err, result) {
+            if (err) console.log(err);
+            else {
+              console.log('disliked')
+              // res.status(201).json({status:201});
+            }
+          })
+          user.updateOne({"posting._id" : post_id }, dislike_2, function (err, result) {
+            if (err) console.log(err);
+            else {
+              console.log('disliked_2')
+              res.status(201).json({status:201});
+            }
+        })
+          break
+        }
+        else{
+          // console.log('inside like')
+          user.updateOne({"posting._id" : post_id }, add_like, function (err, result) {
+            if (err) console.log(err);
+            else {
+              console.log('edited')
+              // res.status(201).json({status:201});
+        
+            }
+        })
+        
+          user.updateOne({_id : id }, liked_posts, function (err, result) {
+            if (err) console.log(err);
+            else {
+              console.log('added')
+              res.status(201).json({status:201});
+            }
+          })
+        }
+        
+      }
+    }
+  })
+})
 app.listen(port, function () {
   console.log(`Listening on port ${port}`);
 });

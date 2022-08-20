@@ -190,11 +190,16 @@
     outline: none;
     resize: none;
     cursor: text;
+    color: white;
 }
 
 #box_item2_content2 textarea[type='text']:hover{
     cursor:text
 }
+
+#box_item2_content2 textarea:focus::placeholder {
+    color: transparent;
+  }
 
 textarea:hover{
     overflow-y: overlay;

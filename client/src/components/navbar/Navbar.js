@@ -15,7 +15,7 @@ export default function Navbar() {
     const Navigate = useNavigate();
     const [issearchbar, setissearchbar] = useState(false);
     const [search, setsearch] = useState({searchquery:''});
-    const [searchResults, setsearchResults] = useState([{first_name:'',second_name:'',id:''}]);
+    const [searchResults, setsearchResults] = useState([{first_name:'',second_name:'',id:'',profile_image:''}]);
 
     const handlesearch = async(e)=>{
         const name = e.target.name;
@@ -51,6 +51,7 @@ export default function Navbar() {
     return (
         <>
             <div className={navbarcss.main}>
+            {/* left part of navbar */}
                 <div className={navbarcss.nav_items} id={navbarcss.item_left}>
                     <Link to='/' className={navbarcss.left_side_items}>
                         <img src={logo} alt='logo' />
@@ -71,7 +72,9 @@ export default function Navbar() {
                                 searchResults.map((elem)=>{
                                     return(
                                             <Link to={`/profile/${elem.id}`} className={navbarcss.search_results}>
-                                                <div className={navbarcss.search_results_content} id={navbarcss.profile_pic}></div>
+                                                <div className={navbarcss.search_results_content} id={navbarcss.profile_pic}>
+                                                    <img src={elem.profile_image} alt="" />
+                                                </div>
                                                 <div className={navbarcss.search_results_content} id={navbarcss.username}>{elem.first_name} {elem.second_name}</div>
                                             </Link>
                                         )
@@ -80,7 +83,8 @@ export default function Navbar() {
                         </>
                         </div>
                     : ''}
-                    
+
+                {/* middle part of navbar */}
                 </div>
                 <div className={navbarcss.nav_items} id={navbarcss.item_middle}>
                     <div className={navbarcss.material_styling} id={navbarcss.home}>
@@ -99,6 +103,8 @@ export default function Navbar() {
                         <SportsEsports fontSize='large'  className={navbarcss.material_styling_inner} />
                     </div>
                 </div>
+
+                {/* right side of navbar */}
                 <div className={navbarcss.nav_items} id={navbarcss.item_right}>
                     <div className={navbarcss.item_right_content} id={navbarcss.item_right_left}>
                         <Link to={`/profile/${user_data.id}`} id={navbarcss.user_image} className={navbarcss.user_info}>
@@ -112,81 +118,85 @@ export default function Navbar() {
                         </Link>
                     </div>
                     <div className={navbarcss.item_right_content} id={navbarcss.item_right_right}>
-                        <div className={navbarcss.options}>
-                            <Widgets fontSize='medium' className={navbarcss.material_styling_right} />
-                        </div>
-                        <div className={navbarcss.options}>
-                            <ChatBubbleOutlined fontSize='medium' className={navbarcss.material_styling_right} />
-                        </div>
-                        <div className={navbarcss.options}>
-                            <Notifications fontSize='medium' className={navbarcss.material_styling_right} />
-                        </div>
-                        <div className={navbarcss.options_2}>
-                            <Dropdown>
-                                <Dropdown.Toggle id={navbarcss.dropdown_basic}>
-                                    
-                                </Dropdown.Toggle>
+                        <div className={navbarcss.item_right_right_wrap}>
+                            <div className={navbarcss.options}>
+                                <Widgets fontSize='medium' className={navbarcss.material_styling_right} />
+                            </div>
+                            <div className={navbarcss.options}>
+                                <ChatBubbleOutlined fontSize='medium' className={navbarcss.material_styling_right} />
+                            </div>
+                            <div className={navbarcss.options}>
+                                <Notifications fontSize='medium' className={navbarcss.material_styling_right} />
+                            </div>
+                            <div className={navbarcss.options_2}>
+                                <Dropdown>
+                                    <Dropdown.Toggle id={navbarcss.dropdown_basic}>
+                                        
+                                    </Dropdown.Toggle>
 
-                                <Dropdown.Menu className={navbarcss.menu_items} >
-                                    <Dropdown.Item className={navbarcss.menu_items_individual} id={navbarcss.menu_items_item1}>
-                                        <div className={navbarcss.profile}>
-                                            <div className={navbarcss.profile_leftpart}></div>
-                                            <div className={navbarcss.profile_rightpart}>
-                                                <div className={navbarcss.profile_rightpart_upper}>{user_data.first_name}</div>
-                                                <div className={navbarcss.profile_rightpart_lower}> See your Profile</div>
+                                    <Dropdown.Menu className={navbarcss.menu_items} >
+                                        <Dropdown.Item className={navbarcss.menu_items_individual} id={navbarcss.menu_items_item1}>
+                                            <div className={navbarcss.profile}>
+                                                <div className={navbarcss.profile_leftpart} >
+                                                    <img src={user_data.profile_image} alt="" />
+                                                </div>
+                                                <div className={navbarcss.profile_rightpart}>
+                                                    <div className={navbarcss.profile_rightpart_upper}>{user_data.first_name}</div>
+                                                    <div className={navbarcss.profile_rightpart_lower}> See your Profile</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item className={navbarcss.menu_items_individual} >
+                                        </Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item className={navbarcss.menu_items_individual} >
+                                            <div className={navbarcss.profile_2}>
+                                                <div className={navbarcss.dropdown_icons}> <Feedback htmlColor='white'/> </div>
+                                                <div className={navbarcss.profile_rightpart_2}>
+                                                    <div className={navbarcss.profile_rightpart_upper_2}>Give Feedback</div>
+                                                    <div className={navbarcss.profile_rightpart_lower}>Help us improve Socialbook</div>
+                                                </div>
+                                            </div>
+                                        </Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item className={navbarcss.menu_items_individual}>
                                         <div className={navbarcss.profile_2}>
-                                            <div className={navbarcss.dropdown_icons}> <Feedback htmlColor='white'/> </div>
-                                            <div className={navbarcss.profile_rightpart_2}>
-                                                <div className={navbarcss.profile_rightpart_upper_2}>Give Feedback</div>
-                                                <div className={navbarcss.profile_rightpart_lower}>Help us improve Socialbook</div>
+                                                <div className={navbarcss.dropdown_icons}> <Settings htmlColor='white'/> </div>
+                                                <div className={navbarcss.profile_rightpart_2}>
+                                                    <div className={navbarcss.profile_rightpart_upper_2}>Settings & Privacy</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item className={navbarcss.menu_items_individual}>
-                                    <div className={navbarcss.profile_2}>
-                                            <div className={navbarcss.dropdown_icons}> <Settings htmlColor='white'/> </div>
-                                            <div className={navbarcss.profile_rightpart_2}>
-                                                <div className={navbarcss.profile_rightpart_upper_2}>Settings & Privacy</div>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item className={navbarcss.menu_items_individual}>
+                                        <div className={navbarcss.profile_2}>
+                                                <div className={navbarcss.dropdown_icons}> <Help htmlColor='white'/> </div>
+                                                <div className={navbarcss.profile_rightpart_2}>
+                                                    <div className={navbarcss.profile_rightpart_upper_2}>Help & Support</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Dropdown.Item>
-                                    <Dropdown.Item className={navbarcss.menu_items_individual}>
-                                    <div className={navbarcss.profile_2}>
-                                            <div className={navbarcss.dropdown_icons}> <Help htmlColor='white'/> </div>
-                                            <div className={navbarcss.profile_rightpart_2}>
-                                                <div className={navbarcss.profile_rightpart_upper_2}>Help & Support</div>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item className={navbarcss.menu_items_individual}>
+                                        <div className={navbarcss.profile_2}>
+                                                <div className={navbarcss.dropdown_icons}> <Nightlight htmlColor='white'/> </div>
+                                                <div className={navbarcss.profile_rightpart_2}>
+                                                    <div className={navbarcss.profile_rightpart_upper_2}>Display & accessbility</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Dropdown.Item>
-                                    <Dropdown.Item className={navbarcss.menu_items_individual}>
-                                    <div className={navbarcss.profile_2}>
-                                            <div className={navbarcss.dropdown_icons}> <Nightlight htmlColor='white'/> </div>
-                                            <div className={navbarcss.profile_rightpart_2}>
-                                                <div className={navbarcss.profile_rightpart_upper_2}>Display & accessbility</div>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item className={navbarcss.menu_items_individual} onClick={()=>{
+                                                localStorage.clear();
+                                                Navigate('/')
+                                                window.location.reload();
+                                        }}>
+                                        <div className={navbarcss.profile_2}>
+                                                <div className={navbarcss.dropdown_icons}> <Logout  htmlColor='white'/> </div>
+                                                <div className={navbarcss.profile_rightpart_2}>
+                                                    <div className={navbarcss.profile_rightpart_upper_2}  >Log out</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </Dropdown.Item>
-                                    <Dropdown.Item className={navbarcss.menu_items_individual} onClick={()=>{
-                                            localStorage.clear();
-
-                                            Navigate('/')
-                                    }}>
-                                    <div className={navbarcss.profile_2}>
-                                            <div className={navbarcss.dropdown_icons}> <Logout  htmlColor='white'/> </div>
-                                            <div className={navbarcss.profile_rightpart_2}>
-                                                <div className={navbarcss.profile_rightpart_upper_2}  >Log out</div>
-                                            </div>
-                                        </div>
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
