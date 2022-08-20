@@ -1,12 +1,13 @@
 # facebook-clone-mern
 This is a Facebook clone MERN App with the following features:- 
+
 1. Search people 
 2. Accept/Send friend Requests 
 3. Login and registration using JWT with otp expiration 
-4.Create Posts with images 
+4. Create Posts with images 
 5. Update Profile Picture and cover image 
 6. View any person's Profile
-7. Like posts
+7. Like Friend's Posts
 
 Preview 
 
