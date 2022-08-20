@@ -216,7 +216,7 @@ else{
                   <AddCircleOutlineIcon/> Add Story
                   </Button>
                   <Button variant="primary" className={Personal_profilecss.button} id={Personal_profilecss.button_2} size="lg">
-                  <EditIcon/> Edit Profile
+                   <div id={Personal_profilecss.button_text}> Edit Profile</div>
                   </Button>
               </div>
             </div>

@@ -139,7 +139,7 @@ export default function Newpost() {
                         </div>
                         <div className={Newpostcss.box_item2_items} id={Newpostcss.box_item2_content2}>
                             {/* yaha name ki value aur usestate m jo name h same hona chaiye */}
-                            <textarea maxLength={101} type="text" placeholder="What's on your mind" name='post_data' value={post.post_data} onChange={handlepost} />
+                            <textarea maxLength={101} id={Newpostcss.text_box} type="text" placeholder="What's on your mind" name='post_data' value={post.post_data} onChange={handlepost} />
                         </div>
                         <div className={Newpostcss.box_item2_items} id={Newpostcss.box_item2_content3} style={{display: state.addphoto }}>
                             <label className={Newpostcss.label} htmlFor="myfile">

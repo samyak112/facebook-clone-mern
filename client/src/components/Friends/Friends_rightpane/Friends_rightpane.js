@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Friends_rightpane() {
   const token = localStorage.getItem('token')
-  const [friend_reqs, setfriend_reqs] = useState([{name:''}])
+  const [friend_reqs, setfriend_reqs] = useState([{name:'',profile_image:''}])
 
   const Show_requests = async() =>{
     const res = await fetch('/show_requests',{
@@ -39,7 +39,7 @@ useEffect(()=>{
           {friend_reqs.map((elem)=>{
               return(
                 <Link to={`/profile/${elem.id}`} className="card" id={Friends_rightpanecss.card} style={{width: '15rem' , background:'#242526',marginRight:'2%',marginTop:'2%' , textDecoration:'none'}}>
-                <img src={imh} className="card-img-top" alt="..."/>
+                <img src={elem.profile_image} className="card-img-top" alt="profile pic"/>
                 <div className="card-body">
                   <h5 className="card-title" style={{color:'white'}}>{elem.name}</h5>
                   <button  className="btn btn-primary" id={Friends_rightpanecss.confirm}>Confirm</button>

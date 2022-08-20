@@ -50,6 +50,10 @@
     height: 95%;
 }
 
+#profile_image img{
+    clip-path: circle();
+}
+
 .rightside{
     display: flex;
     align-items: center;

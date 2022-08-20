@@ -88,6 +88,7 @@ export default function Landing_page() {
         else if (data.status === 201){
             localStorage.setItem('token', data.token);
             Navigate('/')
+            window.location.reload();
 
         }
 
@@ -127,6 +128,8 @@ export default function Landing_page() {
         
 
     }
+    var min_date = `${(new Date().getFullYear())-18}-0${new Date().getMonth()}-0${new Date().getDate()}`;
+    // var min_date = "2001-01-01"
     
 
   return <div>
@@ -156,7 +159,7 @@ export default function Landing_page() {
                 <form className="right_side_upper" id="sign_in" autoComplete='off'>
                     <input className="right_side_items" id="item_1" type="email" value={userlogin.email} placeholder="Enter email" name="email"  onChange={handlelogin} required ></input>
                     <div className="right_side_items" id="item_2"> 
-                        <input  id="item_2_1" type={showicon.pass} placeholder="Enter pass" value={userlogin.password}  name="password" onChange={handlelogin} required></input>
+                        <input  id="item_2_1" type={showicon.pass} placeholder="Enter password" value={userlogin.password}  name="password" onChange={handlelogin} required></input>
                         <div id="item_2_2" onClick={Visibility_func}> {showicon.icon} </div>
                     </div>
                     <button onClick={postlogin} className="right_side_items" id="item_3">Log In</button>
@@ -194,33 +197,35 @@ export default function Landing_page() {
                     </div>
                     <div   className="new_acccount_item" id="new_item_5">
                         <div className="item_5_content" id="item_5_1">Date of birth</div>
-                        <input type="date" autoComplete='off' className="input_fields" id="item_5_2" name="date" value={userregister.date}  onChange={handleregister} required></input>                
+                        <input type="date" autoComplete='off' className="input_fields" id="item_5_2" name="date" max={min_date} value={userregister.date}  onChange={handleregister} required></input>                
                     </div>
                     <div className="new_acccount_item" id="new_item_6">
                         <div id="item_6_1">Gender</div>
                         <div id="item_6_2">
-                            <div className="item_6_2_content" id="item_6_2_1">
-                                
-                                <label className="gender">
-                                    <input type="radio" autoComplete='off' name="gender" value="Male" onChange={handleregister} required></input>
-                                    <span className="checkmark"> </span>
-                                </label>
-                                <div className="gender_text">Male</div>
-                                
-                            </div>
-                            <div className="item_6_2_content" id="item_6_2_2">
-                                <label className="gender">
-                                    <input type="radio" autoComplete='off' value="Female" onChange={handleregister} name="gender"></input>
-                                    <span className="checkmark"> </span>
-                                </label>
-                                <div className="gender_text">Female</div>
-                            </div>
-                            <div className="item_6_2_content" id="item_6_2_3">
-                                <label className="gender">
-                                    <input type="radio" autoComplete='off' value="custom" onChange={handleregister} name="gender"></input>
-                                    <span className="checkmark"> </span>
-                                </label>
-                                <div className="gender_text">Custom</div>
+                            <div id="item_6_2_wrap">
+                                <div className="item_6_2_content" id="item_6_2_1">
+                                    
+                                    <label className="gender">
+                                        <input type="radio" autoComplete='off' name="gender" value="Male" onChange={handleregister} required></input>
+                                        <span className="checkmark"> </span>
+                                    </label>
+                                    <div className="gender_text">Male</div>
+                                    
+                                </div>
+                                <div className="item_6_2_content" id="item_6_2_2">
+                                    <label className="gender">
+                                        <input type="radio" autoComplete='off' value="Female" onChange={handleregister} name="gender"></input>
+                                        <span className="checkmark"> </span>
+                                    </label>
+                                    <div className="gender_text">Female</div>
+                                </div>
+                                <div className="item_6_2_content" id="item_6_2_3">
+                                    <label className="gender">
+                                        <input type="radio" autoComplete='off' value="custom" onChange={handleregister} name="gender"></input>
+                                        <span className="checkmark"> </span>
+                                    </label>
+                                    <div className="gender_text">Custom</div>
+                                </div>
                             </div>
                         </div>
                     </div>
